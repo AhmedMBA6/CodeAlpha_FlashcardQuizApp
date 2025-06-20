@@ -10,12 +10,24 @@ This is a Flutter-based mobile app developed as part of the *CodeAlpha Internshi
 - Clean and modern UI
 
 ## 📁 Project Structure
-- /lib/screens – App screens (Home, Lessons, Quiz)
-- /lib/widgets – Reusable UI components
-- /lib/models – Data structures
-- /assets/ – Images, fonts, audio files
+- /lib/ui – Presentation layer (pages, widgets, state)
+- /lib/business_logic – Domain layer (use cases, repositories, entities)
+- /lib/data_layer – Data layer (models, repositories, data sources)
+- /lib/app_core – Core/shared code
 
 ## 🚀 Getting Started
 ```bash
 fvm flutter pub get
-fvm flutter run
+```
+
+### Run with Flavors
+```bash
+# Run development flavor
+fvm flutter run --flavor dev --target lib/main_dev.dart
+
+# Run production flavor
+fvm flutter run --flavor prod --target lib/main_prod.dart
+```
+
+---
+Feel free to update the features and structure as the project evolves!
