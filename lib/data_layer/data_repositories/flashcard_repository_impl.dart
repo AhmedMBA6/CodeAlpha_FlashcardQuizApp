@@ -5,6 +5,11 @@ import 'package:codealpha_flashcard_quiz_app/business_logic/business_logic_repos
 import '../data_models/flashcard_model.dart';
 
 class FlashcardRepositoryImpl implements FlashcardRepository {
+  // Private constructor
+  FlashcardRepositoryImpl._();
+  // Static instance
+  static final FlashcardRepositoryImpl instance = FlashcardRepositoryImpl._();
+
   static const _flashcardsKey = 'flashcards';
 
   Future<SharedPreferences> _getPrefs() async {
