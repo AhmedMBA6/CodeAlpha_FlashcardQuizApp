@@ -11,7 +11,7 @@ class FlashcardManagementPage extends StatefulWidget {
 }
 
 class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
-  final _repository = FlashcardRepositoryImpl();
+  final _repository = FlashcardRepositoryImpl.instance;
   late final GetAllFlashcards _getAll;
   late final AddFlashcard _add;
   late final UpdateFlashcard _update;
@@ -95,24 +95,26 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
                   return;
                 }
                 if (isEditing) {
-                  await _update(index!, Flashcard(question: question, answer: answer));
-                  setState(() {
-                    _flashcards[index] = Flashcard(question: question, answer: answer);
-                  });
+                  final updatedCard = Flashcard(question: question, answer: answer);
+                  await _update(index!, updatedCard);
+                  setState(() => _flashcards[index] = updatedCard);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Flashcard updated!')),
                   );
                 } else {
-                  await _add(Flashcard(question: question, answer: answer));
+                  final newCard = Flashcard(question: question, answer: answer);
+                  // Animate the UI first
                   setState(() {
-                    _flashcards.insert(0, Flashcard(question: question, answer: answer));
-                    _listKey.currentState?.insertItem(0);
+                    _flashcards.insert(0, newCard);
+                    _listKey.currentState?.insertItem(0, duration: const Duration(milliseconds: 400));
                   });
+                  // Then save to persistence
+                  await _add(newCard); 
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Flashcard added!')),
                   );
                 }
-                Navigator.of(context).pop();
+                if (context.mounted) Navigator.of(context).pop();
               },
               child: Text(isEditing ? 'Update' : 'Add'),
             ),
@@ -141,21 +143,24 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
       ),
     );
     if (confirmed == true) {
-      await _delete(index);
+      // Remove from UI with animation first
       final removedCard = _flashcards.removeAt(index);
       _listKey.currentState?.removeItem(
         index,
-        (context, animation) => _buildCard(removedCard, index, animation),
+        (context, animation) => _buildCard(removedCard, animation),
         duration: const Duration(milliseconds: 400),
       );
-      setState(() {});
+      // Then delete from persistence
+      await _delete(index); 
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Flashcard deleted!')),
       );
     }
   }
 
-  Widget _buildCard(Flashcard card, int index, Animation<double> animation) {
+  Widget _buildCard(Flashcard card, Animation<double> animation) {
+    // Note: We don't need the index here anymore for the build method itself
     return SizeTransition(
       sizeFactor: animation,
       child: Card(
@@ -183,7 +188,11 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
                 child: IconButton(
                   icon: const Icon(Icons.edit),
                   constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-                  onPressed: () => _showFlashcardDialog(flashcard: card, index: index),
+                  onPressed: () {
+                    // Find the index of the card to pass to the dialog
+                    final index = _flashcards.indexOf(card);
+                    _showFlashcardDialog(flashcard: card, index: index);
+                  },
                 ),
               ),
               Semantics(
@@ -192,7 +201,11 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
                 child: IconButton(
                   icon: const Icon(Icons.delete),
                   constraints: const BoxConstraints(minWidth: 48, minHeight: 48),
-                  onPressed: () => _confirmDelete(index),
+                  onPressed: () {
+                    // Find the index of the card to delete
+                    final index = _flashcards.indexOf(card);
+                    _confirmDelete(index);
+                  },
                 ),
               ),
             ],
@@ -243,7 +256,7 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
                 return Semantics(
                   label: 'Flashcard: ${card.question}',
                   hint: 'Double tap to edit. Swipe left or right for more options.',
-                  child: _buildCard(card, index, animation),
+                  child: _buildCard(card, animation),
                 );
               },
             ),
