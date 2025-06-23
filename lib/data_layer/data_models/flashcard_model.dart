@@ -1,4 +1,3 @@
-import 'dart:convert';
 import '../../business_logic/business_logic_entities/flashcard.dart';
 
 class FlashcardModel extends Flashcard {

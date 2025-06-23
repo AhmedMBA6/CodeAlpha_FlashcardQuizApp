@@ -3,7 +3,7 @@ import '../../app_core/navigation/routes.dart';
 
 class HomePage extends StatelessWidget {
   final String flavor;
-  const HomePage({Key? key, required this.flavor}) : super(key: key);
+  const HomePage({super.key, required this.flavor});
 
   @override
   Widget build(BuildContext context) {

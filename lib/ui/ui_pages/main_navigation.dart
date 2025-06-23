@@ -5,7 +5,7 @@ import '../../app_core/theme/app_colors.dart';
 
 class MainNavigation extends StatefulWidget {
   final String flavor;
-  const MainNavigation({Key? key, required this.flavor}) : super(key: key);
+  const MainNavigation({super.key, required this.flavor});
 
   @override
   State<MainNavigation> createState() => _MainNavigationState();
