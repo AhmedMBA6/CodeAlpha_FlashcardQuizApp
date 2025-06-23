@@ -1,5 +1,17 @@
-import 'main.dart' as app;
+import 'package:codealpha_flashcard_quiz_app/app.dart';
+import 'package:codealpha_flashcard_quiz_app/app_core/config/environment_config.dart';
+import 'package:flutter/material.dart';
 
 void main() {
-  app.main(flavor: 'prod');
+  // Production-specific configuration
+  const flavor = 'prod';
+  
+  // Print environment information for debugging
+  EnvironmentConfig.printEnvironmentInfo();
+  
+  // You can add prod-specific setup here
+  // WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  
+  runApp(MyApp(flavor: flavor));
 } 
