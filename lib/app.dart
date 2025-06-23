@@ -51,7 +51,8 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
+      // Show debug banner only in development
+      debugShowCheckedModeBanner: flavor == 'dev',
       theme: themeData,
       darkTheme: darkThemeData,
       themeMode: ThemeMode.system,
