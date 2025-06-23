@@ -1,4 +1,4 @@
-package com.example.codealpha_flashcard_quiz_app
+package com.bauiomy.codealphaflashcard
 
 import io.flutter.embedding.android.FlutterActivity
 

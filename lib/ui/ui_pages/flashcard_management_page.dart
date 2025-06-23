@@ -96,7 +96,7 @@ class _FlashcardManagementPageState extends State<FlashcardManagementPage> {
                 }
                 if (isEditing) {
                   final updatedCard = Flashcard(question: question, answer: answer);
-                  await _update(index!, updatedCard);
+                  await _update(index, updatedCard);
                   setState(() => _flashcards[index] = updatedCard);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Flashcard updated!')),
