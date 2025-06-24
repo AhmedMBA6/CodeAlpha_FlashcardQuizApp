@@ -1,63 +1,55 @@
-import 'package:codealpha_flashcard_quiz_app/app_core/navigation/app_router.dart';
-import 'package:codealpha_flashcard_quiz_app/app_core/theme/app_colors.dart';
-import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/main_navigation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'app_core/theme/app_theme_manager.dart';
+import 'app_core/di/service_locator.dart';
+import 'app_core/navigation/app_router.dart';
+import 'ui/ui_pages/main_navigation.dart';
 
-class MyApp extends StatelessWidget {
-  final String flavor;
-  const MyApp({super.key, required this.flavor});
+/// Main application widget
+class FlashcardQuizApp extends StatefulWidget {
+  const FlashcardQuizApp({super.key});
+
+  @override
+  State<FlashcardQuizApp> createState() => _FlashcardQuizAppState();
+}
+
+class _FlashcardQuizAppState extends State<FlashcardQuizApp> {
+  @override
+  void initState() {
+    super.initState();
+    _initializeApp();
+  }
+
+  /// Initialize app dependencies and services
+  Future<void> _initializeApp() async {
+    // Initialize dependency injection
+    await ServiceLocator.init();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = GoogleFonts.robotoTextTheme(
-      Theme.of(context).textTheme.copyWith(
-            titleLarge: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            bodyMedium: const TextStyle(fontSize: 15),
-          ),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812), // iPhone X design size
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return MaterialApp(
+          title: 'Flashcard Quiz App',
+          debugShowCheckedModeBanner: false,
+          theme: AppThemeManager.lightTheme,
+          darkTheme: AppThemeManager.darkTheme,
+          themeMode: AppThemeManager.defaultThemeMode,
+          home: const MainNavigation(flavor: 'dev'),
+          onGenerateRoute: AppRouter.generateRoute,
+        );
+      },
     );
+  }
 
-    final themeData = ThemeData(
-      primarySwatch: kAppPurple,
-      textTheme: textTheme,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: kAppPurple,
-        foregroundColor: Colors.white,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: kAppPurple,
-      ),
-      colorScheme: ColorScheme.fromSwatch(primarySwatch: kAppPurple).copyWith(
-        secondary: kAppPurple.shade200,
-      ),
-    );
-
-    final darkThemeData = ThemeData.dark().copyWith(
-      primaryColor: kAppPurple,
-      colorScheme: ColorScheme.fromSwatch(
-        brightness: Brightness.dark,
-        primarySwatch: kAppPurple,
-      ).copyWith(
-        secondary: kAppPurple.shade200,
-      ),
-      textTheme: textTheme,
-      appBarTheme: const AppBarTheme(
-        backgroundColor: kAppPurple,
-        foregroundColor: Colors.white,
-      ),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        backgroundColor: kAppPurple,
-      ),
-    );
-
-    return MaterialApp(
-      // Show debug banner only in development
-      debugShowCheckedModeBanner: flavor == 'dev',
-      theme: themeData,
-      darkTheme: darkThemeData,
-      themeMode: ThemeMode.system,
-      home: MainNavigation(flavor: flavor),
-      onGenerateRoute: AppRouter.generateRoute,
-    );
+  @override
+  void dispose() {
+    // Dispose dependencies when app is closed
+    ServiceLocator.dispose();
+    super.dispose();
   }
 } 
