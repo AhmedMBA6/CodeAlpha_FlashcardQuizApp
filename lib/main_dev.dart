@@ -1,17 +1,22 @@
-import 'package:codealpha_flashcard_quiz_app/app.dart';
-import 'package:codealpha_flashcard_quiz_app/app_core/config/environment_config.dart';
 import 'package:flutter/material.dart';
+import 'app.dart';
+import 'app_core/config/environment_config.dart';
+import 'app_core/di/service_locator.dart';
 
-void main() {
+/// Development environment entry point
+void main() async {
+  // Ensure Flutter is initialized
+  WidgetsFlutterBinding.ensureInitialized();
+  
   // Development-specific configuration
   const flavor = 'dev';
   
   // Print environment information for debugging
   EnvironmentConfig.printEnvironmentInfo();
-  
-  // You can add dev-specific setup here
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  
-  runApp(MyApp(flavor: flavor));
+
+  // Initialize service locator
+  await ServiceLocator.init();
+
+  // Run the app
+  runApp(const FlashcardQuizApp());
 } 

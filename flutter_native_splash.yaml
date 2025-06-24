@@ -6,3 +6,7 @@ flutter_native_splash:
   web: false
   android_gravity: center
   ios_content_mode: center 
+  # Following are specific parameters for Android 12+.
+  android_12:
+    color: "#7B3FE4"
+    image: assets/icons/splash_android12_logo.png

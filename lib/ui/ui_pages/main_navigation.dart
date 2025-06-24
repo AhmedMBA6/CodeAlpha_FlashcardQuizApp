@@ -1,5 +1,5 @@
-import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/flashcard_management_page.dart';
-import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/home_page.dart';
+import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/home/home_page.dart';
+import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/flashcard_management/flashcard_management_page.dart';
 import 'package:flutter/material.dart';
 import '../../app_core/theme/app_colors.dart';
 
