@@ -1,9 +1,10 @@
-import '../../app_core/navigation/routes.dart';
 import 'package:flutter/material.dart';
-import '../../business_logic/business_logic_entities/flashcard.dart';
-import '../../data_layer/data_repositories/flashcard_repository_impl.dart';
-import '../../business_logic/business_logic_usecases/flashcard_usecases.dart';
-import 'package:flip_card/flip_card.dart';
+import '../../../app_core/navigation/routes.dart';
+import '../../../business_logic/business_logic_entities/flashcard.dart';
+import '../../../data_layer/data_repositories/flashcard_repository_impl.dart';
+import '../../../business_logic/business_logic_usecases/flashcard_usecases.dart';
+import 'quiz_card.dart';
+import 'quiz_controls.dart';
 
 class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
@@ -15,7 +16,6 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   final _repository = FlashcardRepositoryImpl.instance;
   late final GetAllFlashcards _getAll;
-  
   final PageController _pageController = PageController();
   List<Flashcard> _flashcards = [];
   List<Flashcard> _studyDeck = [];
@@ -69,14 +69,12 @@ class _QuizPageState extends State<QuizPage> {
         _score++;
       });
     }
-
     if (_currentIndex < _studyDeck.length - 1) {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
       );
     } else {
-      // Quiz finished
       Navigator.pushReplacementNamed(
         context,
         AppRoutes.quizResults,
@@ -89,7 +87,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(_studyDeck.isEmpty ? 'Quiz Mode' : 'Card ${_currentIndex + 1} of ${_studyDeck.length}'),
+        title: Text(_studyDeck.isEmpty ? 'Quiz Mode' : 'Card ${_currentIndex + 1} of ${_studyDeck.length}'),
         actions: [
           if (_studyDeck.isNotEmpty)
             IconButton(
@@ -115,75 +113,12 @@ class _QuizPageState extends State<QuizPage> {
                         },
                       ),
                     ),
-                    _buildNavigationControls(),
+                    QuizNavigationControls(
+                      onCorrect: () => _markAnswer(true),
+                      onIncorrect: () => _markAnswer(false),
+                    ),
                   ],
                 ),
-    );
-  }
-
-  Widget _buildNavigationControls() {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          _buildAnswerButton('Incorrect', Colors.red, () => _markAnswer(false)),
-          _buildAnswerButton('Correct', Colors.green, () => _markAnswer(true)),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildAnswerButton(String text, Color color, VoidCallback onPressed) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-      ),
-      child: Text(text),
-    );
-  }
-}
-
-class FlashcardView extends StatefulWidget {
-  final Flashcard flashcard;
-  const FlashcardView({super.key, required this.flashcard});
-
-  @override
-  State<FlashcardView> createState() => _FlashcardViewState();
-}
-
-class _FlashcardViewState extends State<FlashcardView> {
-  @override
-  Widget build(BuildContext context) {
-    return FlipCard(
-      direction: FlipDirection.HORIZONTAL,
-      front: FlashcardContent(text: widget.flashcard.question),
-      back: FlashcardContent(text: widget.flashcard.answer),
-    );
-  }
-}
-
-class FlashcardContent extends StatelessWidget {
-  final String text;
-  const FlashcardContent({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      margin: const EdgeInsets.all(32),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-      child: Center(
-        child: Text(
-          text,
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall,
-        ),
-      ),
     );
   }
 } 

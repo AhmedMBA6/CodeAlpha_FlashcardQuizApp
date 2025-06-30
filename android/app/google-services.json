@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "155854526597",
+    "project_id": "codealpha-flashcard-dev",
+    "storage_bucket": "codealpha-flashcard-dev.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155854526597:android:662e56fa96719c9e5471ec",
+        "android_client_info": {
+          "package_name": "com.bauiomy.codealphaflashcard"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmRmyCzIaPendiJnFPGG0-ruDr_p2WCV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
