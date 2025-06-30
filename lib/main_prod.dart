@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'app.dart';
 import 'app_core/config/environment_config.dart';
 
+
+
 /// Production environment entry point
 void main() {
   // Ensure Flutter is initialized
@@ -12,6 +14,7 @@ void main() {
   
   // Print environment information for debugging
   EnvironmentConfig.printEnvironmentInfo();
+
 
   // Run the app
   runApp(const FlashcardQuizApp());
