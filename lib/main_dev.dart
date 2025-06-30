@@ -1,10 +1,13 @@
 
+
+
 import 'package:flutter/material.dart';
 import 'app.dart';
 import 'app_core/config/environment_config.dart';
 import 'app_core/di/service_locator.dart';
 
 /// Development environment entry point
+
 void main() async{
   // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,6 +17,7 @@ void main() async{
   
   // Print environment information for debugging
   EnvironmentConfig.printEnvironmentInfo();
+
 
 
   // Initialize service locator
