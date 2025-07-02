@@ -8,7 +8,7 @@ import 'package:flutter/foundation.dart'
 ///
 /// Example:
 /// ```dart
-/// import 'firebase_options.dart';
+/// import 'firebase_options_dev.dart';
 /// // ...
 /// await Firebase.initializeApp(
 ///   options: DefaultFirebaseOptions.currentPlatform,
@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAmRmyCzIaPendiJnFPGG0-ruDr_p2WCV4',
-    appId: '1:155854526597:android:662e56fa96719c9e5471ec',
+    appId: '1:155854526597:android:d8427a5969363d8a5471ec',
     messagingSenderId: '155854526597',
     projectId: 'codealpha-flashcard-dev',
     storageBucket: 'codealpha-flashcard-dev.firebasestorage.app',
@@ -59,10 +59,10 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAKfplTSC665lCpT58WRJu-DFbq3HSywbI',
-    appId: '1:155854526597:ios:6965668b4afb9df25471ec',
+    appId: '1:155854526597:ios:387463681e6221d05471ec',
     messagingSenderId: '155854526597',
     projectId: 'codealpha-flashcard-dev',
     storageBucket: 'codealpha-flashcard-dev.firebasestorage.app',
-    iosBundleId: 'com.bauiomy.codealphaflashcard',
+    iosBundleId: 'com.bauiomy.codealphaflashcard.dev',
   );
 }
