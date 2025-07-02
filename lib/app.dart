@@ -7,7 +7,8 @@ import 'ui/ui_pages/main_navigation.dart';
 
 /// Main application widget
 class FlashcardQuizApp extends StatefulWidget {
-  const FlashcardQuizApp({super.key});
+  final String flavor;
+  const FlashcardQuizApp({super.key, required this.flavor});
 
   @override
   State<FlashcardQuizApp> createState() => _FlashcardQuizAppState();
@@ -39,7 +40,7 @@ class _FlashcardQuizAppState extends State<FlashcardQuizApp> {
           theme: AppThemeManager.lightTheme,
           darkTheme: AppThemeManager.darkTheme,
           themeMode: AppThemeManager.defaultThemeMode,
-          home: const MainNavigation(flavor: 'dev'),
+          home: MainNavigation(flavor: widget.flavor),
           onGenerateRoute: AppRouter.generateRoute,
         );
       },

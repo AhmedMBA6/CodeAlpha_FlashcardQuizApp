@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/flashcard_management/flashcard_management_page.dart';
 import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/quiz/quiz_page.dart';
 import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/results/results_screen.dart';
-import 'package:codealpha_flashcard_quiz_app/ui/ui_pages/home/home_page.dart';
 import 'routes.dart';
 
 class AppRouter {
@@ -19,7 +18,8 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (_) => ResultsScreen(score: score, total: total));
       case AppRoutes.home:
-        return MaterialPageRoute(builder: (_) => const HomePage(flavor: 'dev'));
+        // TODO: Pass the correct flavor from navigation context
+        throw UnimplementedError('Flavor must be passed to HomePage via navigation.');
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

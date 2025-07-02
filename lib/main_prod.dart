@@ -17,5 +17,5 @@ void main() {
 
 
   // Run the app
-  runApp(const FlashcardQuizApp());
+  runApp(FlashcardQuizApp(flavor: flavor));
 } 

@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'app.dart';
 import 'app_core/config/environment_config.dart';
@@ -18,11 +15,9 @@ void main() async{
   // Print environment information for debugging
   EnvironmentConfig.printEnvironmentInfo();
 
-
-
   // Initialize service locator
   await ServiceLocator.init();
 
   // Run the app
-  runApp(const FlashcardQuizApp());
+  runApp(FlashcardQuizApp(flavor: flavor));
 } 
