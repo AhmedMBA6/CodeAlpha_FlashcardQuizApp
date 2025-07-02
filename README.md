@@ -229,7 +229,17 @@ jobs:
 
 ## 🖼️ Screenshots
 
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/86a6ba37-663f-4571-be0f-7816d7fab71f" width="200"/>
+  <img src="https://github.com/user-attachments/assets/25e842fa-757d-4bc3-b300-cf3787772ce9" width="200"/>
+  <img src="https://github.com/user-attachments/assets/b90d71e1-d682-418d-8b0e-26e33c01514b" width="200"/>
+  <img src="https://github.com/user-attachments/assets/4b408d08-ac46-4561-9b7d-e62dc132ff1c" width="200"/>
+  <img src="https://github.com/user-attachments/assets/3bc9b973-e29a-424e-8e32-ee312cc1d281" width="200"/>
+  <img src="https://github.com/user-attachments/assets/83b3f0ab-e632-417e-bd0f-b0227c4f9b5a" width="200"/>
+  <img src="https://github.com/user-attachments/assets/555b4b9d-05ec-4e46-841b-2d3aa28956ab" width="200"/>
+  <img src="https://github.com/user-attachments/assets/fae5f235-26fd-42ef-96a3-25520f3020d0" width="200"/>
 > 
+
 
 ---
 
