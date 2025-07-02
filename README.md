@@ -1,52 +1,46 @@
 # CodeAlpha Flashcard Quiz App
 
-A modern Flutter application for creating, managing, and studying flashcards with an integrated quiz system. Built with clean architecture principles and featuring a beautiful, responsive UI.
+A modern, cross-platform Flutter application for creating, managing, and studying flashcards with an integrated quiz system. Built with clean architecture, robust environment configuration, and a beautiful, responsive UI.
 
-## 🎯 Project Overview
+---
 
-This flashcard quiz app allows users to:
-- Create and manage custom flashcards
-- Study flashcards with interactive flip animations
-- Take quizzes to test knowledge retention
-- Track learning progress
-- Enjoy a modern, accessible user interface
+## 🚀 Project Overview
+
+- **Create, edit, and delete flashcards**
+- **Study with interactive flip animations**
+- **Take quizzes to test your knowledge**
+- **Track your learning progress**
+- **Enjoy a modern, accessible, and responsive UI**
+- **Supports multiple environments (dev/prod) with separate Firebase projects**
+
+---
 
 ## ✨ Features
 
-### Core Functionality
-- **Flashcard Management**: Create, edit, and delete flashcards
-- **Interactive Study Mode**: Flip cards with smooth animations
-- **Quiz System**: Test knowledge with randomized questions
-- **Progress Tracking**: Monitor learning progress
-- **Data Persistence**: Local storage using SharedPreferences
+- Flashcard management (CRUD)
+- Quiz system with scoring
+- Progress tracking
+- Local data persistence (SharedPreferences)
+- Firebase integration (dev/prod flavors)
+- Modern Material 3 UI, dark/light themes
+- Responsive layouts (`flutter_screenutil`)
+- Clean architecture (domain, data, presentation layers)
+- Dependency injection (`get_it`)
+- Custom reusable widgets
 
-### UI/UX Features
-- **Modern Design**: Clean, intuitive interface with Material Design 3
-- **Responsive Layout**: Adapts to different screen sizes
-- **Dark/Light Theme**: Automatic theme switching
-- **Smooth Animations**: Engaging flip card animations
-- **Accessibility**: Screen reader support and semantic labels
+---
 
-### Technical Features
-- **Clean Architecture**: Separation of concerns with domain, data, and presentation layers
-- **Dependency Injection**: Using GetIt for service management
-- **Flavor Support**: Separate development and production builds
-- **Custom Widgets**: Reusable UI components
-- **State Management**: Efficient state handling
-
-## 🏗️ Architecture
-
-The app follows Clean Architecture principles with clear separation of concerns:
+## 🏗️ Project Structure
 
 ```
 lib/
 ├── app_core/
-│   ├── config/
-│   ├── di/
-│   ├── navigation/
-│   ├── theme/
-│   ├── utils/
-│   └── widgets/
+│   ├── config/           # Environment config
+│   ├── di/               # Dependency injection (service locator)
+│   ├── navigation/       # App routing
+│   ├── theme/            # Theming and colors
+│   ├── utils/            # Utilities (e.g., screen utils)
+│   └── widgets/          # Shared widgets
 ├── business_logic/
 │   ├── business_logic_entities/
 │   ├── business_logic_repositories/
@@ -55,196 +49,203 @@ lib/
 │   ├── data_models/
 │   ├── data_repositories/
 │   └── data_sources/
-└── ui/
-    └── ui_pages/
-        ├── flashcard_management/
-        │   ├── flashcard_management_page.dart
-        │   ├── flashcard_list.dart
-        │   ├── flashcard_card.dart
-        │   └── flashcard_dialog.dart
-        ├── quiz/
-        │   ├── quiz_page.dart
-        │   ├── quiz_card.dart
-        │   └── quiz_controls.dart
-        ├── home/
-        │   ├── home_page.dart
-        │   └── feature_card.dart
-        ├── results/
-        │   └── results_screen.dart
-        └── main_navigation.dart
+├── ui/
+│   └── ui_pages/
+│       ├── flashcard_management/
+│       ├── home/
+│       ├── quiz/
+│       ├── results/
+│       └── main_navigation.dart
+├── firebase_options_dev.dart
+├── firebase_options_prod.dart
+├── main_dev.dart
+├── main_prod.dart
+└── app.dart
 ```
 
-## 🚀 Getting Started
+---
+
+## 🔥 Firebase & Flavors
+
+- **Development and Production flavors** are supported.
+- Each flavor uses its own Firebase project and configuration files.
+- See `lib/firebase_options_dev.dart` and `lib/firebase_options_prod.dart`.
+- **Android:** Place `google-services.json` in `android/app/src/dev/` and `android/app/src/prod/`
+- **iOS:** Place `GoogleService-Info.plist` in the appropriate flavor folder (see iOS setup)
+- Use the [FlutterFire CLI](https://firebase.flutter.dev/docs/cli/) to generate/update options files.
+
+---
+
+## 🛠️ Getting Started
 
 ### Prerequisites
 
-- Flutter SDK (^3.8.1)
+- Flutter SDK (≥3.8.1)
 - Dart SDK
-- Android Studio / VS Code
-- Android SDK (for Android development)
-- Xcode (for iOS development, macOS only)
+- Android Studio or VS Code
+- Android SDK (for Android)
+- Xcode (for iOS/macOS)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd codealpha_flashcard_quiz_app
-   ```
+```bash
+git clone <repository-url>
+cd codealpha_flashcard_quiz_app
+flutter pub get
+```
 
-2. **Install dependencies**
-   ```bash
-   flutter pub get
-   ```
-
-3. **Set up flavors** (Important!)
-   This project uses separate entry points for development and production environments.
+---
 
 ## 🎯 Running the App
 
-### Development Environment
-```bash
-# Run development flavor
-flutter run --flavor dev --target lib/main_dev.dart
+### Development Flavor
 
-# Build development APK
+```bash
+flutter run --flavor dev --target lib/main_dev.dart
 flutter build apk --flavor dev --target lib/main_dev.dart
 ```
 
-### Production Environment
-```bash
-# Run production flavor
-flutter run --flavor prod --target lib/main_prod.dart
+### Production Flavor
 
-# Build production APK
+```bash
+flutter run --flavor prod --target lib/main_prod.dart
 flutter build apk --flavor prod --target lib/main_prod.dart
 ```
 
-### Web Development
+### Web
+
 ```bash
-# Run for web
 flutter run -d chrome --target lib/main_dev.dart
 ```
 
+---
+
 ## 📱 Platform Support
 
-- ✅ Android
-- ✅ iOS
-- ✅ Web
-- ✅ Windows
-- ✅ macOS
-- ✅ Linux
+- Android
+- iOS
+- Web
+- Windows
+- macOS
+- Linux
 
-## 🛠️ Development Workflow
+---
 
-### Code Structure Guidelines
+## 🧩 Code Guidelines
 
-1. **Follow Clean Architecture**: Keep domain, data, and presentation layers separate
-2. **Use Dependency Injection**: Register services in `lib/app_core/di/service_locator.dart`
-3. **Custom Widgets**: Use shared widgets from `lib/app_core/widgets/`
-4. **Theming**: Follow the theme system in `lib/app_core/theme/`
+- **Clean Architecture:** Domain, data, and presentation layers are separated.
+- **Dependency Injection:** Register services in `lib/app_core/di/service_locator.dart`.
+- **Custom Widgets:** Use shared widgets from `lib/app_core/widgets/`.
+- **Theming:** Use the theme system in `lib/app_core/theme/`.
+- **Environment Config:** Managed in `lib/app_core/config/environment_config.dart`.
 
-### Adding New Features
+---
 
-1. **Domain Layer**: Define entities and use cases in `business_logic/`
-2. **Data Layer**: Implement repositories in `data_layer/`
-3. **UI Layer**: Create pages and sub-widgets in `ui/ui_pages/`
-4. **Navigation**: Add routes in `lib/app_core/navigation/routes.dart`
+## 🧪 Testing
 
-### Testing
+- **Unit & Widget Tests:**  
+  `flutter test`
+- *(Add more tests in the `test/` directory as needed)*
 
-#### Unit & Widget Tests
-```bash
-flutter test
-```
+---
 
-#### Integration Tests
-```bash
-flutter test integration_test/full_flow_test.dart
-```
-See `integration_test/full_flow_test.dart` for a sample full user flow test.
+## 📦 Key Dependencies
 
-## 📦 Dependencies
+- `flutter`
+- `google_fonts`
+- `shared_preferences`
+- `flip_card`
+- `flutter_screenutil`
+- `get_it`
+- `firebase_core` and related Firebase packages
 
-### Core Dependencies
-- **flutter**: Flutter SDK
-- **google_fonts**: Custom typography
-- **shared_preferences**: Local data persistence
-- **flip_card**: Interactive card animations
-- **flutter_screenutil**: Responsive design utilities
-- **get_it**: Dependency injection
-
-### Development Dependencies
-- **flutter_test**: Testing framework
-- **integration_test**: Integration testing
-- **flutter_lints**: Code quality and style
-- **flutter_launcher_icons**: App icon generation
-- **flutter_native_splash**: Splash screen generation
+---
 
 ## 🎨 Customization
 
-### App Icons
-The app uses `flutter_launcher_icons` for icon generation. Configuration is in `flutter_launcher_icons.yaml`.
+- **App Icons:** Configured via `flutter_launcher_icons.yaml`
+- **Splash Screen:** Configured via `flutter_native_splash.yaml`
+- **Themes:** Customize in `lib/app_core/theme/`
 
-### Splash Screen
-Splash screen configuration is in `flutter_native_splash.yaml`.
-
-### Theming
-Customize themes in `lib/app_core/theme/`:
-- `app_colors.dart`: Color definitions
-- `app_light_theme.dart`: Light theme
-- `app_dark_theme.dart`: Dark theme
-- `app_text_theme.dart`: Typography
+---
 
 ## 🔧 Configuration
 
-### Environment Configuration
-Environment-specific settings are managed in `lib/app_core/config/environment_config.dart`.
+- **Environment Configuration:**  
+  Managed in `lib/app_core/config/environment_config.dart`.
+- **Build Variants:**  
+  - Development: Debug mode with development configurations  
+  - Production: Release mode with production configurations
 
-### Build Variants
-- **Development**: Debug mode with development configurations
-- **Production**: Release mode with production configurations
+---
+
+## 🛡️ CI/CD (Continuous Integration & Deployment)
+
+This project is ready for automated testing and deployment using CI/CD tools such as **GitHub Actions**.
+
+### Example: GitHub Actions Workflow
+
+```yaml
+name: Flutter CI
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.8.1'
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
+      - run: flutter build apk --flavor dev --target lib/main_dev.dart
+```
+
+> **Tip:** Add secrets for Firebase and other sensitive files using your CI/CD provider's secret management.
+
+---
+
+## 🔥 Advanced Firebase Setup
+
+- **Multiple Flavors:**  
+  Each flavor (dev/prod) uses its own Firebase project and configuration files.
+- **Android:**  
+  - Place `google-services.json` in `android/app/src/dev/` and `android/app/src/prod/`
+- **iOS:**  
+  - Place `GoogleService-Info.plist` in the appropriate flavor folder (see iOS setup)
+- **FlutterFire CLI:**  
+  - Use the [FlutterFire CLI](https://firebase.flutter.dev/docs/cli/) to generate and update `firebase_options_dev.dart` and `firebase_options_prod.dart`
+- **Switching Flavors:**  
+  - Always use the correct `--flavor` and `--target` flags when running or building
+
+---
+
+## 🖼️ Screenshots
+
+> 
+
+---
 
 ## 🐛 Troubleshooting
 
-### Common Issues
+- **Always specify the `--target` flag** for the correct flavor.
+- **Dependency issues:**  
+  ```bash
+  flutter clean
+  flutter pub get
+  ```
+- **Platform-specific issues:**  
+  - Android: Check SDK/NDK, Gradle versions
+  - iOS: Ensure Xcode is up to date, run `flutter doctor`
 
-1. **Build Fails Without Target**
-   - Always specify `--target` flag when running or building
-   - Use `lib/main_dev.dart` for development
-   - Use `lib/main_prod.dart` for production
-
-2. **Dependencies Issues**
-   ```bash
-   flutter clean
-   flutter pub get
-   ```
-
-3. **Android Build Issues**
-   - Ensure Android SDK and NDK are properly configured
-   - Check `android/app/build.gradle.kts` for version compatibility
-
-4. **iOS Build Issues**
-   - Ensure Xcode is up to date
-   - Run `flutter doctor` to check iOS toolchain
-
-### Debug Commands
-
-```bash
-# Check Flutter installation
-flutter doctor
-
-# Clean and rebuild
-flutter clean
-flutter pub get
-
-# Analyze code
-flutter analyze
-```
-
-## 📄 License
-
-This project is developed as part of the CodeAlpha Internship Program.
+---
 
 ## 🤝 Contributing
 
@@ -254,12 +255,20 @@ This project is developed as part of the CodeAlpha Internship Program.
 4. Add tests if applicable
 5. Submit a pull request
 
+---
+
+## 📄 License
+
+This project is developed as part of the CodeAlpha Internship Program.
+
+---
+
 ## 📞 Support
 
-For support and questions:
 - Create an issue in the repository
 - Contact the development team
 
 ---
 
-**Note**: This project uses a multi-flavor architecture. Always specify the correct entry point when running or building the application.
+**Note:**  
+This project uses a multi-flavor architecture. Always specify the correct entry point when running or building the application.
